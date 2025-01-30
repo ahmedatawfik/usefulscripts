@@ -1,0 +1,5 @@
+- To build and start: `docker-compose up -d --build`
+- Access the installation at http://localhost:8080/phpbb/install
+- After installation is complete from the above link, you have to run `docker exec -it phpbb rm -rf /var/www/html/phpbb/install`
+- Enjoy!
+- To wipe it all and start all over: `docker-compose down -v`
