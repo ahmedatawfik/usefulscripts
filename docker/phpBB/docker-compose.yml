@@ -1,0 +1,32 @@
+services:
+  phpbb:
+    build: .
+    container_name: phpbb
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - phpbb-data:/var/www/html/phpbb
+    depends_on:
+      - mariadb
+    environment:
+      - MYSQL_HOST=mymariadb_host
+      - MYSQL_USER=myphpbb_mymariadb_user
+      - MYSQL_PASSWORD=MySuperStrongPassword12345
+      - MYSQL_DATABASE=myphpbb_db
+
+  mariadb:
+    image: mariadb:10.11
+    container_name: phpbb-mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: myphpbb_db
+      MYSQL_USER: myphpbb_mymariadb_user
+      MYSQL_PASSWORD: MySuperStrongPassword12345
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  phpbb-data:
+  db-data:
